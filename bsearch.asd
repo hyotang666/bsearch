@@ -3,6 +3,7 @@
 (defsystem "bsearch"
   :depends-on
   nil
+  :license "Public Domain"
   :components
   ((:file "bsearch")))
 ;; Perform method below is added by JINGOH.GENERATOR.
