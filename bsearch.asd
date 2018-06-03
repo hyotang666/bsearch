@@ -6,6 +6,6 @@
   :license "Public Domain"
   :components
   ((:file "bsearch")))
-;; Perform method below is added by JINGOH.GENERATOR.
-(defmethod perform ((o test-op) (c (eql (find-system "bsearch"))))
-  (test-system :bsearch.test))
+
+(defmethod component-depends-on ((o test-op) (c (eql (find-system "bsearch"))))
+  (append (call-next-method)'((test-op "bsearch.test"))))
