@@ -4,6 +4,8 @@
   :depends-on
   nil
   :license "Public Domain"
+  :author "Shinichi Sato"
+  :description "Just only binary searching."
   :components
   ((:file "bsearch")))
 
