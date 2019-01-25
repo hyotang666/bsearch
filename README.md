@@ -22,10 +22,8 @@ Return 2 values.
 Integrated by apropreate utility libraries. (e.g. alexandria)
 ### License
 Public domain.
-### Developed with
-CLISP/2.49
 ### Tested with
-CCL/1.11 ECL/16.1.3 SBCL/1.4.15
+CCL/1.11.5 SBCL/1.4.15
 
 ## Installation
 

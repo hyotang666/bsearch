@@ -28,7 +28,9 @@
 #?(bsearch 3 #(1 2 3)) => 3
 
 ; vector := simple vector, otherwise error.
-#?(bsearch 0 '(1 2 3 4 5)) :signals type-error
+#?(bsearch 0 '(1 2 3 4 5))
+:signals (or type-error
+	     warning) ; for ccl
 #?(bsearch 0 (make-array 5 :initial-contents '(1 2 3 4 5)
 			 :fill-pointer 5 :adjustable T))
 => unspecified
@@ -37,7 +39,8 @@
 
 ; key := function designator as (function(T)T), otherwise error.
 #?(bsearch 0 #(1 2 3) :key :not-function-desinator)
-:signals error
+:signals (or error
+	     warning) ; for ccl
 ; The default is #'identity.
 #?(bsearch 1 #("1" "2" "3")) :signals type-error
 #?(bsearch 1 #("1" "2" "3") :key #'read-from-string)
@@ -46,7 +49,8 @@
 
 ; test := function designator as (function(T T)generarized-boolean), otherwise error.
 #?(bsearch 0 #(1 2 3) :test :not-function-designator)
-:signals error
+:signals (or error
+	     warning) ; for ccl
 ; The default is #'eql.
 #?(bsearch (princ-to-string 2) #("1" "2" "3")) :signals type-error
 #?(bsearch (princ-to-string 2) #("1" "2" "3"):compare #'string<)
@@ -79,7 +83,8 @@
 
 ; compare := function designator as (function(T T)generarized-boolean), otherwise error.
 #?(bsearch 0 #(1 2 3) :compare :not-function-designator)
-:signals error
+:signals (or error
+	     warning) ; for ccl
 #?(bsearch (princ-to-string 2) #("1" "2" "3"))
 :signals type-error
 #?(bsearch (princ-to-string 2) #("1" "2" "3"):compare #'string<)
