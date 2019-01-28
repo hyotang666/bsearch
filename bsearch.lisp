@@ -53,7 +53,7 @@
     (cond
       ((funcall test item elt)
        (return (values target index)))
-      ((= 1 (+ center %))
+      ((zerop center)
        (return (values default nil)))
       ((funcall compare item elt)
        (setf end index))
