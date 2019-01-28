@@ -48,6 +48,8 @@
 				  0))
 	  target (aref vector index)
 	  elt (funcall key target))
+    #++(format t "~%start ~S end ~S center ~S index ~S % ~S"
+	    start end center index %)
     (cond
       ((funcall test item elt)
        (return (values target index)))
