@@ -9,8 +9,8 @@
 			    &key
 			    (:key (or function symbol))
 			    (:test (or function symbol))
-			    (:start fixnum)
-			    (:end fixnum)
+			    (:start (mod #.most-positive-fixnum))
+			    (:end (mod #.most-positive-fixnum))
 			    (:compare (or function symbol))
 			    (:default t))
 			 t)
@@ -24,16 +24,17 @@
 	     (coerce compare 'function)
 	     default))
 
-(declaim(ftype (function (t vector function function fixnum fixnum function t)
+(declaim(ftype (function (t vector function function
+			    (mod #.most-positive-fixnum)
+			    (mod #.most-positive-fixnum)
+			    function t)
 			 t)
 	       %bsearch))
 
 (defun %bsearch(item vector key test start end compare default)
-  (declare (type fixnum start end)
-	   (type function key test compare)
+  (declare (type (mod #.most-positive-fixnum) start end)
 	   (dynamic-extent key test compare)
-	   (optimize(speed 3)(safety 0)(debug 0))
-	   (type simple-vector vector))
+	   (optimize(speed 3)(safety 0)(debug 0)))
   (assert(< -1 start end (1+(length vector))))
   (prog((center 0)
 	(% 0)
