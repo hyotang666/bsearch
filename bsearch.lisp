@@ -61,17 +61,24 @@
     (go REC)))
 
 (define-compiler-macro bsearch(item vector &key key test start end compare default)
-  (let((v(gensym "VECTOR")))
-    `(let((,v ,vector))
-       (declare(type simple-vector ,v))
-       (%bsearch ,item
-		 ,v
-		 ,(or (and key `(coerce ,key 'function))
-		      '#'identity)
-		 ,(or (and test `(coerce ,test 'function))
-		      '#'eql)
-		 ,(or start 0)
-		 ,(or end `(length ,v))
-		 ,(or (and compare `(coerce ,compare 'function))
-		      '#'<)
-		 ,default))))
+  (flet((ensure-fun(form)
+	  (typecase form
+	    ((CONS(EQL QUOTE)(CONS SYMBOL NULL))
+	     `#',form)
+	    ((CONS(EQL FUNCTION)T)
+	     form)
+	    (T `(COERCE ,form 'FUNCTION)))))
+    (let((v(gensym "VECTOR")))
+      `(let((,v ,vector))
+	 (declare(type vector ,v))
+	 (%bsearch ,item
+		   ,v
+		   ,(or (and key (ensure-fun key))
+			'#'identity)
+		   ,(or (and test (ensure-fun test))
+			'#'eql)
+		   ,(or start 0)
+		   ,(or end `(length ,v))
+		   ,(or (and compare (ensure-fun compare))
+			'#'<)
+		   ,default)))))
