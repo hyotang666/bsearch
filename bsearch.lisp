@@ -46,8 +46,7 @@
     (setq index (+ center start (if(zerop(+ center %))
 				  1
 				  0))
-	  target (locally #+sbcl(declare(optimize(sb-c::insert-array-bounds-checks 0)))
-			  (svref vector index))
+	  target (aref vector index)
 	  elt (funcall key target))
     (cond
       ((funcall test item elt)
