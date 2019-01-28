@@ -63,6 +63,7 @@
 ; Specify start position of VECTOR.
 #?(bsearch 1 #(1 2 3) :start -1)
 :signals error
+,:lazy t
 #?(bsearch 1 #(1 2 3) :start 1)
 => NIL
 #?(bsearch 1 #(1 2 3) :start 3)
@@ -73,6 +74,7 @@
 ; Specify end position of VECTOR.
 #?(bsearch 3 #(1 2 3) :end -1)
 :signals error
+,:lazy t
 #?(bsearch 3 #(1 2 3) :end 2)
 => NIL
 #?(bsearch 3 #(1 2 3) :end 3)
