@@ -17,12 +17,12 @@
 	       bsearch))
 
 (defun bsearch(item vector &key (key #'identity)(test #'eql)(start 0)(end (length vector)) (compare #'<)(default nil))
-  (%bsearch9 item vector
-	     (coerce key 'function)
-	     (coerce test 'function)
-	     start end
-	     (coerce compare 'function)
-	     default))
+  (%bsearch item vector
+	    (coerce key 'function)
+	    (coerce test 'function)
+	    start end
+	    (coerce compare 'function)
+	    default))
 
 (declaim(ftype (function (t vector function function
 			    (mod #.most-positive-fixnum)
